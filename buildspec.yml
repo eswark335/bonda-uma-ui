@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - npm install -g @angular/cli
+      - npm install
+
+  build:
+    commands:
+      - ng build --configuration production
+
+  post_build:
+    commands:
+      - aws s3 sync dist/bonda-uma-ui/browser s3://bondauma.in --delete
+      - aws cloudfront create-invalidation \
+          --distribution-id E3KXNQ3S52CNA7 \
+          --paths "/*"

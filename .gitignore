@@ -1,43 +1,49 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Node modules
+node_modules/
+jspm_packages/
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# Build output
+dist/
+out-tsc/
+tmp/
+temp/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+# Angular build artifacts
+.angular/
+coverage/
+*.log
 
-# IDEs and editors
+# Environment files (if you don't want them in Git)
+src/environments/*.ts
+!src/environments/environment.example.ts
+
+# IDE files
+.vscode/
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
 *.sublime-workspace
+*.sublime-project
 
-# Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
+# OS files
 .DS_Store
 Thumbs.db
+
+# Optional npm cache
+.npm/
+
+# Optional REPL history
+.node_repl_history
+
+# Compiled output
+*.js
+*.js.map
+*.d.ts
+
+# Dependency directories
+bower_components/
+
+# Misc
+.sass-cache/
+*.tgz
+.yarn-integrity
+package-lock.json
+yarn.lock

@@ -1,0 +1,263 @@
+.dashboard-container {
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  
+  h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+  }
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  &.success {
+    border-left: 4px solid #27ae60;
+  }
+  
+  &.warning {
+    border-left: 4px solid #f39c12;
+  }
+  
+  .metric-icon {
+    font-size: 2.5rem;
+  }
+  
+  .metric-content {
+    h3 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin: 0;
+    }
+    
+    p {
+      color: #7f8c8d;
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+  }
+}
+
+.progress-list {
+  .progress-item {
+    margin-bottom: 1rem;
+    
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background: #ecf0f1;
+      border-radius: 4px;
+      overflow: hidden;
+      
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #3498db, #2980b9);
+        transition: width 0.3s ease;
+      }
+    }
+  }
+}
+
+.political-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e74c3c;
+    }
+    
+    .stat-label {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+.donations-section {
+  margin-bottom: 2rem;
+}
+
+.donation-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  
+  h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+  }
+  
+  .donation-total {
+    text-align: center;
+    margin-bottom: 2rem;
+    
+    .amount {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #27ae60;
+      display: block;
+    }
+    
+    .label {
+      color: #7f8c8d;
+      font-size: 1.1rem;
+    }
+  }
+  
+  .donation-breakdown {
+    .breakdown-item {
+      margin-bottom: 1rem;
+      
+      .breakdown-bar {
+        height: 20px;
+        border-radius: 10px;
+        margin-bottom: 0.5rem;
+        
+        &.education { background: #3498db; }
+        &.healthcare { background: #e74c3c; }
+        &.infrastructure { background: #f39c12; }
+      }
+      
+      span {
+        font-weight: 500;
+        color: #2c3e50;
+      }
+    }
+  }
+}
+
+.activities-summary {
+  .summary-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    h3 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+    }
+    
+    .activity-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      
+      .activity-stat {
+        text-align: center;
+        padding: 1rem;
+        border-radius: 8px;
+        
+        &.completed { background: #d5f4e6; }
+        &.ongoing { background: #fff3cd; }
+        &.planned { background: #d1ecf1; }
+        
+        .number {
+          font-size: 2rem;
+          font-weight: bold;
+          display: block;
+          
+          .completed & { color: #27ae60; }
+          .ongoing & { color: #f39c12; }
+          .planned & { color: #3498db; }
+        }
+        
+        .label {
+          color: #7f8c8d;
+          font-size: 0.9rem;
+        }
+      }
+    }
+    
+    .budget-info {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .political-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .activity-stats {
+    grid-template-columns: 1fr !important;
+  }
+}

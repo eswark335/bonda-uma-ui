@@ -1,0 +1,61 @@
+<div class="local-development-container">
+  <header class="page-header">
+    <div class="container">
+      <h1>Local Development Projects</h1>
+      <p>Infrastructure and community development initiatives</p>
+    </div>
+  </header>
+
+  <section class="projects-section">
+    <div class="container">
+      <div class="projects-grid">
+        <div class="project-card" *ngFor="let project of projects">
+          <div class="project-header">
+            <h3>{{ project.title }}</h3>
+            <span class="status" [class]="project.status.toLowerCase().replace(' ', '-')">
+              {{ project.status }}
+            </span>
+          </div>
+          <div class="project-details">
+            <p class="location">📍 {{ project.location }}</p>
+            <p class="budget">💰 Budget: {{ project.budget }}</p>
+            <p class="description">{{ truncateText(project.description) }}</p>
+            <div class="button-container">
+              <button class="view-details-btn" (click)="viewDetails(project)">
+                View Before & After
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal for Before/After Images -->
+  <div class="modal-overlay" *ngIf="selectedProject" (click)="closeDetails()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>{{ selectedProject.title }}</h2>
+        <button class="close-btn" (click)="closeDetails()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="images-container">
+          <div class="image-section">
+            <h4>Before</h4>
+            <img [src]="selectedProject.beforeImage" [alt]="selectedProject.title + ' - Before'">
+          </div>
+          <div class="image-section">
+            <h4>After</h4>
+            <img [src]="selectedProject.afterImage" [alt]="selectedProject.title + ' - After'">
+          </div>
+        </div>
+        <div class="project-info">
+          <p><strong>Location:</strong> {{ selectedProject.location }}</p>
+          <p><strong>Budget:</strong> {{ selectedProject.budget }}</p>
+          <p><strong>Status:</strong> {{ selectedProject.status }}</p>
+          <p><strong>Description:</strong> {{ selectedProject.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

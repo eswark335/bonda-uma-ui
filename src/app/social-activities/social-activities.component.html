@@ -1,0 +1,40 @@
+<div class="social-activities-container">
+  <header class="page-header">
+    <div class="container">
+      <h1>Social Activities</h1>
+      <p>Community service and development initiatives</p>
+    </div>
+  </header>
+
+  <section class="quick-links">
+    <div class="container">
+      <div class="link-card">
+        <a routerLink="magazines" class="magazine-link">
+          <div class="link-icon">📖</div>
+          <h3>Magazines</h3>
+          <p>View and download our community magazines</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="activities-section">
+    <div class="container">
+      <div class="activities-grid">
+        <div class="activity-card" *ngFor="let activity of activities">
+          <div class="activity-image">
+            <img [src]="activity.image" [alt]="activity.title">
+          </div>
+          <div class="activity-content">
+            <h3>{{ activity.title }}</h3>
+            <div class="activity-meta">
+              <span class="date">📅 {{ activity.date }}</span>
+              <span class="location">📍 {{ activity.location }}</span>
+            </div>
+            <p>{{ activity.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

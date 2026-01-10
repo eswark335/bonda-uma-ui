@@ -1,0 +1,107 @@
+<div class="support-container">
+  <div class="support-header">
+    <h1>We're Here to Help</h1>
+    <p>Have questions or need assistance? We're here to answer and support you every step of the way.</p>
+    <div class="response-info">
+      <div class="info-card">
+        <span class="icon">⏰</span>
+        <div>
+          <h4>Quick Response</h4>
+          <p>We respond within 24 hours</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="icon">📞</span>
+        <div>
+          <h4>Direct Contact</h4>
+          <p>Speak directly with our team</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="icon">✅</span>
+        <div>
+          <h4>Issue Resolution</h4>
+          <p>Most issues resolved in 48 hours</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="supportForm" (ngSubmit)="onSubmit()" class="support-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" formControlName="name" placeholder="Enter your full name">
+        <div class="error" *ngIf="supportForm.get('name')?.invalid && supportForm.get('name')?.touched">
+          Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="mobileNumber">Mobile Number *</label>
+        <input type="tel" id="mobileNumber" formControlName="mobileNumber" placeholder="10-digit mobile number">
+        <div class="error" *ngIf="supportForm.get('mobileNumber')?.invalid && supportForm.get('mobileNumber')?.touched">
+          Please enter a valid 10-digit mobile number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" formControlName="email" placeholder="your.email@example.com">
+        <div class="error" *ngIf="supportForm.get('email')?.invalid && supportForm.get('email')?.touched">
+          Please enter a valid email address
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="age">Age *</label>
+        <input type="number" id="age" formControlName="age" placeholder="Your age">
+        <div class="error" *ngIf="supportForm.get('age')?.invalid && supportForm.get('age')?.touched">
+          Please enter a valid age
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="division">Select Your Division *</label>
+      <select id="division" formControlName="division">
+        <option value="">Choose your division</option>
+        <option *ngFor="let division of divisions" [value]="division">{{division}} Division</option>
+      </select>
+      <div class="error" *ngIf="supportForm.get('division')?.invalid && supportForm.get('division')?.touched">
+        Please select a division
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Describe Your Issue *</label>
+      <textarea id="description" formControlName="description" placeholder="Please provide detailed information about your query or concern. The more details you provide, the better we can assist you." rows="5"></textarea>
+      <div class="error" *ngIf="supportForm.get('description')?.invalid && supportForm.get('description')?.touched">
+        Description is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Attach Supporting Document/Image (Optional)</label>
+      <div class="file-upload">
+        <input type="file" id="image" (change)="onFileSelect($event)" accept="image/*,.pdf,.doc,.docx">
+        <label for="image" class="file-label">
+          <span class="file-icon">📎</span>
+          Choose File
+        </label>
+      </div>
+      <small class="file-note">Supported formats: Images, PDF, Word documents (Max 5MB)</small>
+    </div>
+
+    <div class="submit-section">
+      <div class="guarantee">
+        <span class="guarantee-icon">🛡️</span>
+        <p><strong>Our Commitment:</strong> Your request will be acknowledged within 2 hours and resolved within 24-48 hours during business days.</p>
+      </div>
+      <button type="submit" [disabled]="!supportForm.valid" class="submit-btn">
+        <span class="btn-icon">📨</span>
+        Submit Support Request
+      </button>
+    </div>
+  </form>
+</div>

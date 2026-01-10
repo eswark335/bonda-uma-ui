@@ -1,0 +1,127 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Administrative Dashboard</h1>
+    <p>Real-time insights and analytics</p>
+  </div>
+
+  <!-- Metrics Cards -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon">👥</div>
+      <div class="metric-content">
+        <h3>{{ dashboardData.userMetrics.totalClicks | number }}</h3>
+        <p>Total Clicks</p>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-icon">📋</div>
+      <div class="metric-content">
+        <h3>{{ dashboardData.grievances.received }}</h3>
+        <p>Grievances Received</p>
+      </div>
+    </div>
+    <div class="metric-card success">
+      <div class="metric-icon">✅</div>
+      <div class="metric-content">
+        <h3>{{ dashboardData.grievances.resolved }}</h3>
+        <p>Resolved</p>
+      </div>
+    </div>
+    <div class="metric-card warning">
+      <div class="metric-icon">⏳</div>
+      <div class="metric-content">
+        <h3>{{ dashboardData.grievances.pending }}</h3>
+        <p>Pending</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-section">
+    <div class="chart-card">
+      <h3>Activities Progress</h3>
+      <div class="progress-list">
+        <div class="progress-item" *ngFor="let activity of chartData.activitiesProgress">
+          <div class="progress-info">
+            <span>{{ activity.name }}</span>
+            <span>{{ activity.progress }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="activity.progress"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Political Activities</h3>
+      <div class="political-stats">
+        <div class="stat-item">
+          <div class="stat-number">{{ dashboardData.political.ralliesAttended }}</div>
+          <div class="stat-label">Rallies Attended</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ dashboardData.political.speechesGiven }}</div>
+          <div class="stat-label">Speeches Given</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ dashboardData.political.meetingsHeld }}</div>
+          <div class="stat-label">Meetings Held</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ dashboardData.political.constituencyVisits }}</div>
+          <div class="stat-label">Constituency Visits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donations Section -->
+  <div class="donations-section">
+    <div class="donation-card">
+      <h3>Donations Overview</h3>
+      <div class="donation-total">
+        <span class="amount">₹{{ (dashboardData.donations.totalReceived / 100000) | number:'1.1-1' }}L</span>
+        <span class="label">Total Received</span>
+      </div>
+      <div class="donation-breakdown">
+        <div class="breakdown-item">
+          <div class="breakdown-bar education" [style.width.%]="(dashboardData.donations.educationFund / dashboardData.donations.totalReceived) * 100"></div>
+          <span>Education: ₹{{ (dashboardData.donations.educationFund / 100000) | number:'1.1-1' }}L</span>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-bar healthcare" [style.width.%]="(dashboardData.donations.healthcareFund / dashboardData.donations.totalReceived) * 100"></div>
+          <span>Healthcare: ₹{{ (dashboardData.donations.healthcareFund / 100000) | number:'1.1-1' }}L</span>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-bar infrastructure" [style.width.%]="(dashboardData.donations.infrastructureFund / dashboardData.donations.totalReceived) * 100"></div>
+          <span>Infrastructure: ₹{{ (dashboardData.donations.infrastructureFund / 100000) | number:'1.1-1' }}L</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activities Summary -->
+  <div class="activities-summary">
+    <div class="summary-card">
+      <h3>Development Activities</h3>
+      <div class="activity-stats">
+        <div class="activity-stat completed">
+          <span class="number">{{ dashboardData.activities.completed }}</span>
+          <span class="label">Completed</span>
+        </div>
+        <div class="activity-stat ongoing">
+          <span class="number">{{ dashboardData.activities.ongoing }}</span>
+          <span class="label">Ongoing</span>
+        </div>
+        <div class="activity-stat planned">
+          <span class="number">{{ dashboardData.activities.planned }}</span>
+          <span class="label">Planned</span>
+        </div>
+      </div>
+      <div class="budget-info">
+        <span>Total Budget: ₹{{ (dashboardData.activities.totalBudget / 100000) | number:'1.1-1' }}L</span>
+      </div>
+    </div>
+  </div>
+</div>
