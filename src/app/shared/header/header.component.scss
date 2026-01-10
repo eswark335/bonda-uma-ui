@@ -94,6 +94,35 @@
       font-weight: 600;
       cursor: pointer;
     }
+
+    .language-switcher {
+      display: flex;
+      gap: 0.25rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 0.25rem;
+      
+      .lang-btn {
+        background: transparent;
+        color: #333;
+        border: none;
+        padding: 0.5rem 0.75rem;
+        border-radius: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+        
+        &.active {
+          background: #333;
+          color: white;
+        }
+      }
+    }
   }
 }
 

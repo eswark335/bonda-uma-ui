@@ -27,7 +27,29 @@ export class LanguageService {
     'pdf_viewer': { en: 'PDF Viewer', te: 'PDF వ్యూయర్' },
     'view_options': { en: 'Use the options below to view the magazine:', te: 'మ్యాగజైన్ను చూడటానికి క్రింది ఎంపికలను ఉపయోగించండి:' },
     'open_new_tab': { en: 'Open in New Tab', te: 'కొత్త ట్యాబ్లో తెరవండి' },
-    'download_pdf': { en: 'Download PDF', te: 'PDF డౌన్లోడ్ చేయండి' }
+    'download_pdf': { en: 'Download PDF', te: 'PDF డౌన్లోడ్ చేయండి' },
+    'welcome': { en: 'Welcome', te: 'స్వాగతం' },
+    'about': { en: 'About', te: 'గురించి' },
+    'contact': { en: 'Contact', te: 'సంప్రదించండి' },
+    'services': { en: 'Services', te: 'సేవలు' },
+    'news': { en: 'News', te: 'వార్తలు' },
+    'events': { en: 'Events', te: 'కార్యక్రమాలు' },
+    'gallery': { en: 'Gallery', te: 'గ్యాలరీ' },
+    'search': { en: 'Search', te: 'వెతకండి' },
+    'menu': { en: 'Menu', te: 'మెనూ' },
+    'close': { en: 'Close', te: 'మూసివేయండి' },
+    'submit': { en: 'Submit', te: 'సమర్పించండి' },
+    'cancel': { en: 'Cancel', te: 'రద్దు చేయండి' },
+    'save': { en: 'Save', te: 'సేవ్ చేయండి' },
+    'edit': { en: 'Edit', te: 'సవరించండి' },
+    'delete': { en: 'Delete', te: 'తొలగించండి' },
+    'view': { en: 'View', te: 'చూడండి' },
+    'share': { en: 'Share', te: 'పంచుకోండి' },
+    'loading': { en: 'Loading...', te: 'లోడ్ అవుతుంది...' },
+    'error': { en: 'Error', te: 'లోపం' },
+    'success': { en: 'Success', te: 'విజయం' },
+    'warning': { en: 'Warning', te: 'హెచ్చరిక' },
+    'info': { en: 'Information', te: 'సమాచారం' }
   };
 
   setLanguage(lang: Language) {

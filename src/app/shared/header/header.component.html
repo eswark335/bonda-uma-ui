@@ -8,11 +8,15 @@
       <span>{{ designation }}</span>
     </div>
     <div class="nav-buttons">
-      <button class="nav-btn" (click)="navigate('/')">Home</button>
-      <button class="nav-btn" (click)="navigate('/social-activities')">Social Activities</button>
-      <button class="nav-btn" (click)="navigate('/local-development')">Local Development</button>
-      <button class="nav-btn support-btn" (click)="navigate('/support')">💬 Support</button>
-      <button class="login-btn" (click)="onLogin()">Login</button>
+      <button class="nav-btn" (click)="navigate('/')">{{ 'home' | translate }}</button>
+      <button class="nav-btn" (click)="navigate('/social-activities')">{{ 'social_activities' | translate }}</button>
+      <button class="nav-btn" (click)="navigate('/local-development')">{{ 'local_development' | translate }}</button>
+      <button class="nav-btn support-btn" (click)="navigate('/support')">💬 {{ 'support' | translate }}</button>
+      <div class="language-switcher">
+        <button class="lang-btn" [class.active]="currentLanguage === 'en'" (click)="switchLanguage('en')">EN</button>
+        <button class="lang-btn" [class.active]="currentLanguage === 'te'" (click)="switchLanguage('te')">తె</button>
+      </div>
+      <button class="login-btn" (click)="onLogin()">{{ 'login' | translate }}</button>
     </div>
   </div>
 </header>

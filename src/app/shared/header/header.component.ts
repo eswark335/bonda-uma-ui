@@ -2,18 +2,25 @@ import { Component } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LanguageService, Language } from '../services/language.service';
+import { TranslatePipe } from '../pipes/translate.pipe';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, TranslatePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  mlaName = 'Bonda Umamaheswara Rao';
-  designation = 'MLA, Vijayawada Central Constituency';
   currentLanguage: Language = 'en';
+
+  get mlaName() {
+    return this.currentLanguage === 'te' ? 'బోండ ఉమామహేశ్వర రావు' : 'Bonda Umamaheswara Rao';
+  }
+
+  get designation() {
+    return this.currentLanguage === 'te' ? 'MLA, విజయవాడ సెంట్రల్ కాన్స్టిట్యూఎన్సీ' : 'MLA, Vijayawada Central Constituency';
+  }
 
   constructor(
     private router: Router,
