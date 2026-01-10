@@ -15,6 +15,4 @@ phases:
   post_build:
     commands:
       - aws s3 sync dist/bonda-uma-ui/browser s3://bondauma.in --delete
-      - aws cloudfront create-invalidation \
-          --distribution-id E3KXNQ3S52CNA7 \
-          --paths "/*"
+      - aws cloudfront create-invalidation --distribution-id E3KXNQ3S52CNA7 --paths "/*"
