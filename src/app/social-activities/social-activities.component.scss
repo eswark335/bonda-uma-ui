@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap');
+
 .social-activities-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #FFFFE0 0%, #FFD700 100%);
+  background: white;
+  font-family: 'Georgia', 'Noto Sans Telugu', serif;
 }
 
 .page-header {
@@ -28,57 +31,159 @@
   }
 }
 
-.quick-links {
-  padding: 2rem 0;
-  
+.navigation-section {
+  padding: 3rem 0;
+  background: transparent;
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
-    display: flex;
-    justify-content: center;
   }
-  
-  .link-card {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-5px);
-    }
-    
-    .magazine-link {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      text-align: center;
-      
-      .link-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+
+  .nav-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .nav-btn {
+      padding: 1.5rem 3rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border: none;
+      background: white;
+      color: #333;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      min-width: 200px;
+
+      &:hover {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        color: white;
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
       }
-      
-      h3 {
-        color: #2c3e50;
-        margin: 0 0 0.5rem 0;
-        font-size: 1.5rem;
-        font-weight: 700;
-      }
-      
-      p {
-        color: #7f8c8d;
-        margin: 0;
-        font-size: 1rem;
+
+      &.active {
+        background: linear-gradient(135deg, #FFD700, #FFA500);
+        color: white;
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        transform: scale(1.05);
       }
     }
   }
 }
 
-.activities-section {
-  padding: 4rem 0;
+.section-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0 0 2rem 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.community-section {
+  padding: 3rem 0;
+  animation: fadeIn 0.5s ease-in;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .content-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    
+    .content-col {
+      h2 {
+        font-size: 2.5rem;
+        color: #2d5016;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        line-height: 1.3;
+        
+        .underline {
+          text-decoration: underline;
+          text-decoration-color: #4CAF50;
+          text-decoration-thickness: 4px;
+          text-underline-offset: 6px;
+          font-size: 1.1em;
+        }
+      }
+      
+      p {
+        color: #333;
+        font-size: 1.15rem;
+        line-height: 1.9;
+      }
+    }
+    
+    .image-col {
+      display: flex;
+      justify-content: center;
+      
+      img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      }
+      
+      .image-wrapper {
+        position: relative;
+        display: inline-block;
+        max-width: 400px;
+        width: 100%;
+        margin: 0 auto;
+        
+        img {
+          width: 100%;
+          border-radius: 10px;
+          box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+          display: block;
+        }
+        
+        .overlay-btn {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: linear-gradient(135deg, #FFD700, #FFA500);
+          color: white;
+          padding: 12px 30px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+          white-space: nowrap;
+          
+          &:hover {
+            background: linear-gradient(135deg, #FFA500, #FF8C00);
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.6);
+          }
+        }
+      }
+    }
+  }
+}
+
+.philanthropy-section {
+  padding: 3rem 0 4rem;
+  animation: fadeIn 0.5s ease-in;
 
   .container {
     max-width: 1200px;
@@ -88,27 +193,36 @@
     .activities-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
+      gap: 2.5rem;
 
       .activity-card {
         background: white;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        transition: all 0.4s ease;
+        border: 3px solid transparent;
 
         &:hover {
-          transform: translateY(-10px);
+          transform: translateY(-15px) scale(1.02);
+          box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
+          border-color: #FFD700;
         }
 
         .activity-image {
-          height: 200px;
+          height: 250px;
           overflow: hidden;
+          position: relative;
 
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
+          }
+
+          &:hover img {
+            transform: scale(1.1);
           }
         }
 
@@ -116,32 +230,57 @@
           padding: 2rem;
 
           h3 {
-            font-size: 1.5rem;
-            color: #333;
+            font-size: 1.6rem;
+            color: #2c3e50;
             margin: 0 0 1rem 0;
             font-weight: 700;
           }
 
           .activity-meta {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
 
             span {
-              font-size: 0.9rem;
-              color: #DAA520;
+              font-size: 0.95rem;
+              color: #FFA500;
               font-weight: 600;
+              background: #FFF8DC;
+              padding: 0.3rem 0.8rem;
+              border-radius: 8px;
             }
           }
 
           p {
             color: #666;
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
+            font-size: 1rem;
           }
         }
       }
     }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
@@ -158,19 +297,79 @@
     }
   }
 
-  .activities-section {
+  .navigation-section {
+    padding: 2rem 0;
+
+    .nav-buttons {
+      gap: 1rem;
+
+      .nav-btn {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        min-width: 150px;
+      }
+    }
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .community-section {
+    padding: 2rem 0;
+
+    .content-row {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      
+      .content-col {
+        h2 {
+          font-size: 1.5rem;
+        }
+        
+        p {
+          font-size: 1rem;
+        }
+      }
+      
+      .image-col {
+        img {
+          max-width: 100%;
+        }
+        
+        .image-wrapper .overlay-btn {
+          position: static;
+          margin-top: 1rem;
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  .philanthropy-section {
     padding: 2rem 0;
 
     .activities-grid {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: 1.5rem;
 
-      .activity-card .activity-content {
-        padding: 1.5rem;
+      .activity-card {
+        .activity-image {
+          height: 200px;
+        }
 
-        .activity-meta {
-          flex-direction: column;
-          gap: 0.5rem;
+        .activity-content {
+          padding: 1.5rem;
+
+          h3 {
+            font-size: 1.3rem;
+          }
+
+          .activity-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+          }
         }
       }
     }

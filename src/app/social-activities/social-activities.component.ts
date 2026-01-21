@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LanguageService } from '../shared/services/language.service';
 
 @Component({
   selector: 'app-social-activities',
@@ -10,6 +11,55 @@ import { RouterModule } from '@angular/router';
   styleUrl: './social-activities.component.scss'
 })
 export class SocialActivitiesComponent {
+  activeSection: 'community' | 'philanthropy' = 'community';
+  currentLanguage: 'en' | 'te' = 'en';
+
+  content = {
+    en: {
+      pageTitle: 'Social Activities',
+      pageDesc: 'Community service and development initiatives',
+      communityBtn: '🏘️ Community',
+      philanthropyBtn: '❤️ Philanthropy',
+      visionTitle: 'Swarna Vijayawada Vision',
+      visionContent: `In line with Swarna Andhra Vision, we are committed to building a prosperous Vijayawada Central constituency where opportunities and progress are accessible to all. By 2047, we envision a constituency where every family, regardless of their background, has the chance to rise, thrive, and contribute to a collective, sustainable future. Together, we will shape a wealthy, healthy and happy Vijayawada where no one is left behind.`,
+      p4Title: 'About Zero Poverty - P4',
+      p4Content: `Swarna Vijayawada is centred on the belief that true prosperity is achieved when every family has the opportunity to succeed. Through the Zero Poverty-P4 (Public Private People Partnership) Initiative, we strive to empower prosperous citizens to step forward and handhold, mentor, and support economically vulnerable families. We seek to create personalised pathways of support for all families involved, to realize a future where every family can rise and contribute to a collective journey of growth and shared prosperity.`,
+      magazineBtn: 'View Magazine Zone',
+      philanthropyTitle: '❤️ Philanthropy'
+    },
+    te: {
+      pageTitle: 'సామాజిక కార్యకలాపాలు',
+      pageDesc: 'సమాజ సేవ మరియు అభివృద్ధి కార్యక్రమాలు',
+      communityBtn: '🏘️ సమాజం',
+      philanthropyBtn: '❤️ దాతృత్వం',
+      visionTitle: 'స్వర్ణ విజయవాడ విజన్',
+      visionContent: `స్వర్ణ ఆంధ్ర విజన్‌కు అనుగుణంగా, అందరికీ అవకాశాలు మరియు పురోగతి అందుబాటులో ఉండే సంపన్న విజయవాడ సెంట్రల్ నియోజకవర్గాన్ని నిర్మించడానికి మేము కట్టుబడి ఉన్నాము. 2047 నాటికి, ప్రతి కుటుంబం, వారి నేపథ్యంతో సంబంధం లేకుండా, ఎదగడానికి, అభివృద్ధి చెందడానికి మరియు సామూహిక, స్థిరమైన భవిష్యత్తుకు దోహదపడే అవకాశం ఉన్న నియోజకవర్గాన్ని మేము ఊహించుకుంటున్నాము. కలిసి, మేము ధనవంతమైన, ఆరోగ్యకరమైన మరియు సంతోషకరమైన విజయవాడను రూపొందిస్తాము, ఎవరూ వెనుకబడరు.`,
+      p4Title: 'జీరో పావర్టీ - P4 గురించి',
+      p4Content: `స్వర్ణ విజయవాడ ప్రతి కుటుంబానికి విజయం సాధించే అవకాశం ఉన్నప్పుడు నిజమైన శ్రేయస్సు సాధించబడుతుందనే నమ్మకంపై కేంద్రీకృతమై ఉంది. జీరో పావర్టీ-P4 (పబ్లిక్ ప్రైవేట్ పీపుల్ పార్టనర్‌షిప్) చొరవ ద్వారా, సంపన్న పౌరులు ముందుకు వచ్చి ఆర్థికంగా బలహీన కుటుంబాలకు మార్గదర్శకత్వం, మద్దతు ఇవ్వడానికి మేము ప్రయత్నిస్తున్నాము. ప్రతి కుటుంబం ఎదగగలిగే మరియు వృద్ధి మరియు భాగస్వామ్య శ్రేయస్సు యొక్క సామూహిక ప్రయాణానికి దోహదపడే భవిష్యత్తును సాకారం చేయడానికి మేము ప్రయత్నిస్తున్నాము.`,
+      magazineBtn: 'మ్యాగజైన్ జోన్ చూడండి',
+      philanthropyTitle: '❤️ దాతృత్వం'
+    }
+  };
+
+  get communityContent() {
+    return this.content[this.currentLanguage].visionContent;
+  }
+
+  get magazineContent() {
+    return this.content[this.currentLanguage].p4Content;
+  }
+
+  constructor(private languageService: LanguageService) {
+    this.currentLanguage = this.languageService.getCurrentLanguage();
+    this.languageService.language$.subscribe(lang => {
+      this.currentLanguage = lang;
+    });
+  }
+
+  setActiveSection(section: 'community' | 'philanthropy') {
+    this.activeSection = section;
+  }
+
   activities = [
     {
       title: 'Organ Donation Awareness',

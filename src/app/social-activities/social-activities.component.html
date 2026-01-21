@@ -1,25 +1,67 @@
 <div class="social-activities-container">
   <header class="page-header">
     <div class="container">
-      <h1>Social Activities</h1>
-      <p>Community service and development initiatives</p>
+      <h1>{{ content[currentLanguage].pageTitle }}</h1>
+      <p>{{ content[currentLanguage].pageDesc }}</p>
     </div>
   </header>
 
-  <section class="quick-links">
+  <!-- Navigation Buttons -->
+  <section class="navigation-section">
     <div class="container">
-      <div class="link-card">
-        <a routerLink="magazines" class="magazine-link">
-          <div class="link-icon">📖</div>
-          <h3>Magazines</h3>
-          <p>View and download our community magazines</p>
-        </a>
+      <div class="nav-buttons">
+        <button 
+          class="nav-btn" 
+          [class.active]="activeSection === 'community'"
+          (click)="setActiveSection('community')">
+          {{ content[currentLanguage].communityBtn }}
+        </button>
+        <button 
+          class="nav-btn" 
+          [class.active]="activeSection === 'philanthropy'"
+          (click)="setActiveSection('philanthropy')">
+          {{ content[currentLanguage].philanthropyBtn }}
+        </button>
       </div>
     </div>
   </section>
 
-  <section class="activities-section">
+  <!-- Community Section -->
+  <section class="community-section" *ngIf="activeSection === 'community'">
     <div class="container">
+      <!-- First Row: Content Left, Image Right -->
+      <div class="content-row">
+        <div class="content-col">
+          <h2><span class="underline">Swarna</span> Vijayawada Vision</h2>
+          <p>{{ communityContent }}</p>
+        </div>
+        <div class="image-col">
+          <img src="/images/community.jpg" alt="Swarna Vijayawada Vision">
+        </div>
+      </div>
+
+      <!-- Second Row: Image Left, Content Right -->
+      <div class="content-row">
+        <div class="image-col">
+          <div class="image-wrapper">
+            <img src="/images/magazine.jpg" alt="About Zero Poverty - P4">
+            <a routerLink="/social-activities/magazines" class="overlay-btn">
+              <i class="bi bi-download"></i> {{ content[currentLanguage].magazineBtn }}
+            </a>
+          </div>
+        </div>
+        <div class="content-col">
+          <h2><span class="underline">About</span> Zero Poverty - P4</h2>
+          <p>{{ magazineContent }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philanthropy Section -->
+  <section class="philanthropy-section" *ngIf="activeSection === 'philanthropy'">
+    <div class="container">
+      <h2 class="section-title">{{ content[currentLanguage].philanthropyTitle }}</h2>
       <div class="activities-grid">
         <div class="activity-card" *ngFor="let activity of activities">
           <div class="activity-image">
