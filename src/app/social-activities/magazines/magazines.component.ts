@@ -50,7 +50,6 @@ export class MagazinesComponent implements OnInit, AfterViewInit {
         this.loadingMagazines = false;
       },
       error: (error) => {
-        console.error('Error loading magazines:', error);
         this.loadingMagazines = false;
       }
     });
@@ -71,7 +70,9 @@ export class MagazinesComponent implements OnInit, AfterViewInit {
     this.zoomLevel = 1;
     
     if (this.isMobile) {
-      this.loadPdfWithPdfJs(magazine.path);
+      setTimeout(() => {
+        this.loadPdfWithPdfJs(magazine.path);
+      }, 200);
     } else {
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(magazine.path);
       setTimeout(() => {
@@ -86,32 +87,42 @@ export class MagazinesComponent implements OnInit, AfterViewInit {
       this.pdfDoc = await loadingTask.promise;
       this.totalPages = this.pdfDoc.numPages;
       this.isLoading = false;
-      this.renderPage(this.currentPage);
+      setTimeout(() => {
+        if (this.pdfCanvas) {
+          this.renderPage(this.currentPage);
+        } else {
+        }
+      }, 200);
     } catch (error) {
-      console.error('Error loading PDF:', error);
       this.isLoading = false;
     }
   }
 
   async renderPage(pageNum: number) {
-    if (this.pageRendering || !this.pdfDoc) return;
+    if (this.pageRendering || !this.pdfDoc || !this.pdfCanvas) {
+      return;
+    }
     
     this.pageRendering = true;
-    const page = await this.pdfDoc.getPage(pageNum);
-    const canvas = this.pdfCanvas.nativeElement;
-    const context = canvas.getContext('2d');
-    
-    const viewport = page.getViewport({ scale: this.zoomLevel * 1.5 });
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
-    
-    const renderContext = {
-      canvasContext: context,
-      viewport: viewport
-    };
-    
-    await page.render(renderContext).promise;
-    this.pageRendering = false;
+    try {
+      const page = await this.pdfDoc.getPage(pageNum);
+      const canvas = this.pdfCanvas.nativeElement;
+      const context = canvas.getContext('2d');
+      
+      const viewport = page.getViewport({ scale: this.zoomLevel * 1.5 });
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      
+      const renderContext = {
+        canvasContext: context,
+        viewport: viewport
+      };
+      
+      await page.render(renderContext).promise;
+    } catch (error) {
+    } finally {
+      this.pageRendering = false;
+    }
   }
 
   nextPage() {
