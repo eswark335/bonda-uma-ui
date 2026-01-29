@@ -84,7 +84,7 @@ export class HomeComponent {
   get mlaData() {
     const lang = this.currentLanguage;
     return {
-      name: lang === 'te' ? 'బొండ ఉమామహేశ్వర రావు' : 'Bonda Umamaheswara Rao',
+      name: lang === 'te' ? 'బొండ ఉమామహేశ్వర రావు' : 'Bonda Uma Maheswara Rao',
       party: lang === 'te' ? 'తెలుగు దేశం పార్టీ' : 'Telugu Desam Party',
       constituency: lang === 'te' ? 'విజయవాడ సెంట్రల్' : 'Vijayawada Central',
       position: lang === 'te' ? 'శాసనసభ సభ్యుడు' : 'Member of Legislative Assembly',
@@ -156,7 +156,7 @@ export class HomeComponent {
   };
 
   contactInfo = {
-    phone: '+91 98490 81314',
+    phone: '+91 99483 31314',
     email: 'bondauma@yahoo.co.in',
     office: '#43-100-10, Ground Floor, PNT Colony, Ajith Singh Nagar, Near Smile Hospital, VIJAYAWADA - 520015',
     hours: 'Monday to Friday, 9 AM - 6 PM'

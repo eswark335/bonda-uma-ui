@@ -15,7 +15,7 @@ export class HeaderComponent {
   currentLanguage: Language = 'en';
 
   get mlaName() {
-    return this.currentLanguage === 'te' ? 'బోండ ఉమామహేశ్వర రావు' : 'Bonda Umamaheswara Rao';
+    return this.currentLanguage === 'te' ? 'బోండ ఉమామహేశ్వర రావు' : 'Bonda Uma Maheswara Rao';
   }
 
   get designation() {
