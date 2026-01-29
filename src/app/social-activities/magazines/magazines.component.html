@@ -61,21 +61,38 @@
     
     <!-- PDF Viewer -->
     <div class="pdf-viewer" [class.loading]="isLoading">
-      <!-- Simple iframe approach for better compatibility -->
+      <!-- Mobile Canvas Viewer -->
+      <div *ngIf="isMobile" class="mobile-pdf-viewer">
+        <div class="pdf-controls">
+          <button class="nav-btn" (click)="prevPage()" [disabled]="currentPage <= 1">←</button>
+          <span class="page-info">{{ currentPage }} / {{ totalPages }}</span>
+          <button class="nav-btn" (click)="nextPage()" [disabled]="currentPage >= totalPages">→</button>
+          <button class="zoom-btn" (click)="zoomOut()">-</button>
+          <span class="zoom-info">{{ (zoomLevel * 100).toFixed(0) }}%</span>
+          <button class="zoom-btn" (click)="zoomIn()">+</button>
+        </div>
+        <div class="canvas-container">
+          <canvas #pdfCanvas></canvas>
+        </div>
+      </div>
+      
+      <!-- Desktop iframe viewer -->
       <iframe 
+        *ngIf="!isMobile"
         [src]="pdfUrl" 
         width="100%" 
         height="700px"
         frameborder="0"
-        class="pdf-iframe">
+        class="pdf-iframe"
+        allow="fullscreen">
       </iframe>
       
-      <!-- Fallback options -->
+      <!-- Fallback buttons if iframe doesn't load -->
       <div class="pdf-fallback">
         <div class="fallback-content">
           <div class="fallback-icon">📄</div>
-          <h4>PDF Viewer</h4>
-          <p>Use the options below to view the magazine:</p>
+          <h4>Having trouble viewing?</h4>
+          <p>Try these options:</p>
           <div class="fallback-options">
             <button class="view-btn" (click)="openPdfInNewTab()">
               <span class="icon">🔗</span> Open in New Tab

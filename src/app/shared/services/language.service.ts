@@ -7,7 +7,7 @@ export type Language = 'en' | 'te';
   providedIn: 'root'
 })
 export class LanguageService {
-  private currentLanguage = new BehaviorSubject<Language>('en');
+  private currentLanguage = new BehaviorSubject<Language>('te');
   public language$ = this.currentLanguage.asObservable();
 
   private translations = {
@@ -59,7 +59,7 @@ export class LanguageService {
 
   getCurrentLanguage(): Language {
     const saved = localStorage.getItem('language') as Language;
-    return saved || 'en';
+    return saved || 'te';
   }
 
   translate(key: string): string {
@@ -69,7 +69,15 @@ export class LanguageService {
   }
 
   constructor() {
-    const savedLang = this.getCurrentLanguage();
-    this.currentLanguage.next(savedLang);
+    // Check if language is already set in localStorage
+    const savedLang = localStorage.getItem('language') as Language;
+    
+    // If no language is saved, set Telugu as default
+    if (!savedLang) {
+      localStorage.setItem('language', 'te');
+      this.currentLanguage.next('te');
+    } else {
+      this.currentLanguage.next(savedLang);
+    }
   }
 }

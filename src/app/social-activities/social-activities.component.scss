@@ -337,11 +337,23 @@
           max-width: 100%;
         }
         
-        .image-wrapper .overlay-btn {
-          position: static;
-          margin-top: 1rem;
-          width: 100%;
-          justify-content: center;
+        .image-wrapper {
+          max-width: 100%;
+          
+          img {
+            max-width: 100%;
+          }
+          
+          .overlay-btn {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            width: auto;
+            max-width: 90%;
+          }
         }
       }
     }

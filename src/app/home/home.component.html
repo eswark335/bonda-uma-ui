@@ -18,25 +18,25 @@
   <!-- About Section -->
   <section class="about">
     <div class="container">
-      <h2>Biography</h2>
+      <h2>{{ content[currentLanguage].biography }}</h2>
       <p class="bio-text">{{ mlaData.bio }}</p>
       <div class="bio-grid">
         <div class="bio-card">
-          <h4>Personal Details</h4>
+          <h4>{{ content[currentLanguage].personalDetails }}</h4>
           <ul>
-            <li><strong>Born:</strong> {{ mlaData.birthDate }}</li>
-            <li><strong>Place:</strong> {{ mlaData.birthPlace }}</li>
-            <li><strong>Parents:</strong> {{ mlaData.parents }}</li>
-            <li><strong>Spouse:</strong> {{ mlaData.spouse }}</li>
-            <li><strong>Children:</strong> {{ mlaData.children }}</li>
+            <li><strong>{{ content[currentLanguage].born }}:</strong> {{ mlaData.birthDate }}</li>
+            <li><strong>{{ content[currentLanguage].place }}:</strong> {{ mlaData.birthPlace }}</li>
+            <li><strong>{{ content[currentLanguage].parents }}:</strong> {{ mlaData.parents }}</li>
+            <li><strong>{{ content[currentLanguage].spouse }}:</strong> {{ mlaData.spouse }}</li>
+            <li><strong>{{ content[currentLanguage].children }}:</strong> {{ mlaData.children }}</li>
           </ul>
         </div>
         <div class="bio-card">
-          <h4>Political Career</h4>
+          <h4>{{ content[currentLanguage].politicalCareer }}</h4>
           <ul>
-            <li><strong>Current Term:</strong> {{ mlaData.currentTerm }}</li>
-            <li><strong>Previous Term:</strong> {{ mlaData.previousTerm }}</li>
-            <li><strong>Constituency:</strong> {{ mlaData.constituency }}</li>
+            <li><strong>{{ content[currentLanguage].currentTerm }}:</strong> {{ mlaData.currentTerm }}</li>
+            <li><strong>{{ content[currentLanguage].previousTerm }}:</strong> {{ mlaData.previousTerm }}</li>
+            <li><strong>{{ content[currentLanguage].constituency }}:</strong> {{ mlaData.constituency }}</li>
           </ul>
         </div>
       </div>
@@ -46,7 +46,7 @@
   <!-- Positions Section -->
   <section class="positions">
     <div class="container">
-      <h2>Positions Held</h2>
+      <h2>{{ content[currentLanguage].positionsHeld }}</h2>
       <div class="positions-grid">
         <div class="position-card" *ngFor="let position of mlaData.positions">
           <div class="position-icon">📋</div>
@@ -75,7 +75,7 @@
   <!-- Term Highlights Section -->
   <section class="highlights">
     <div class="container">
-      <h2>Term Highlights</h2>
+      <h2>{{ content[currentLanguage].termHighlights }}</h2>
       <div class="highlights-grid">
         <div class="highlight-card" *ngFor="let highlight of mlaData.termHighlights">
           <div class="highlight-year" *ngIf="highlight.year">🏆 {{ highlight.year }}</div>
@@ -126,26 +126,26 @@
   <!-- Contact Section -->
   <section class="contact-section">
     <div class="container">
-      <h2>Contact Information</h2>
+      <h2>{{ content[currentLanguage].contactInfo }}</h2>
       <div class="contact-grid">
         <div class="contact-card">
           <div class="contact-icon">📞</div>
-          <h4>Phone</h4>
+          <h4>{{ content[currentLanguage].phone }}</h4>
           <p>{{ contactInfo.phone }}</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">✉️</div>
-          <h4>Email</h4>
+          <h4>{{ content[currentLanguage].email }}</h4>
           <p>{{ contactInfo.email }}</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">🏢</div>
-          <h4>Office</h4>
+          <h4>{{ content[currentLanguage].office }}</h4>
           <p>{{ contactInfo.office }}</p>
         </div>
         <div class="contact-card">
           <div class="contact-icon">🕒</div>
-          <h4>Office Hours</h4>
+          <h4>{{ content[currentLanguage].officeHours }}</h4>
           <p>{{ contactInfo.hours }}</p>
         </div>
       </div>

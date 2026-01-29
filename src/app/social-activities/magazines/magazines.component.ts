@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MagazineService, Magazine } from './magazine.service';
+import * as pdfjsLib from 'pdfjs-dist';
 
 @Component({
   selector: 'app-magazines',
@@ -12,7 +13,9 @@ import { MagazineService, Magazine } from './magazine.service';
   templateUrl: './magazines.component.html',
   styleUrl: './magazines.component.scss'
 })
-export class MagazinesComponent implements OnInit {
+export class MagazinesComponent implements OnInit, AfterViewInit {
+  @ViewChild('pdfCanvas') pdfCanvas!: ElementRef<HTMLCanvasElement>;
+  
   magazines: Magazine[] = [];
   selectedMagazine: Magazine | null = null;
   pdfUrl: SafeResourceUrl = '';
@@ -21,15 +24,23 @@ export class MagazinesComponent implements OnInit {
   zoomLevel: number = 1;
   isLoading: boolean = false;
   loadingMagazines: boolean = true;
+  isMobile: boolean = false;
+  pdfDoc: any = null;
+  pageRendering: boolean = false;
 
   constructor(
     private sanitizer: DomSanitizer,
     private magazineService: MagazineService
-  ) {}
+  ) {
+    this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+  }
 
   ngOnInit() {
     this.loadMagazines();
   }
+
+  ngAfterViewInit() {}
 
   loadMagazines() {
     this.loadingMagazines = true;
@@ -59,12 +70,62 @@ export class MagazinesComponent implements OnInit {
     this.currentPage = 1;
     this.zoomLevel = 1;
     
-    // Use direct PDF URL
-    this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(magazine.path);
-    
-    setTimeout(() => {
+    if (this.isMobile) {
+      this.loadPdfWithPdfJs(magazine.path);
+    } else {
+      this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(magazine.path);
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 500);
+    }
+  }
+
+  async loadPdfWithPdfJs(url: string) {
+    try {
+      const loadingTask = pdfjsLib.getDocument(url);
+      this.pdfDoc = await loadingTask.promise;
+      this.totalPages = this.pdfDoc.numPages;
       this.isLoading = false;
-    }, 500);
+      this.renderPage(this.currentPage);
+    } catch (error) {
+      console.error('Error loading PDF:', error);
+      this.isLoading = false;
+    }
+  }
+
+  async renderPage(pageNum: number) {
+    if (this.pageRendering || !this.pdfDoc) return;
+    
+    this.pageRendering = true;
+    const page = await this.pdfDoc.getPage(pageNum);
+    const canvas = this.pdfCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+    
+    const viewport = page.getViewport({ scale: this.zoomLevel * 1.5 });
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+    
+    const renderContext = {
+      canvasContext: context,
+      viewport: viewport
+    };
+    
+    await page.render(renderContext).promise;
+    this.pageRendering = false;
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.renderPage(this.currentPage);
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.renderPage(this.currentPage);
+    }
   }
 
   downloadMagazine() {
@@ -87,10 +148,16 @@ export class MagazinesComponent implements OnInit {
 
   zoomIn() {
     this.zoomLevel = Math.min(this.zoomLevel + 0.25, 3);
+    if (this.isMobile && this.pdfDoc) {
+      this.renderPage(this.currentPage);
+    }
   }
 
   zoomOut() {
     this.zoomLevel = Math.max(this.zoomLevel - 0.25, 0.5);
+    if (this.isMobile && this.pdfDoc) {
+      this.renderPage(this.currentPage);
+    }
   }
 
   resetZoom() {
@@ -103,5 +170,6 @@ export class MagazinesComponent implements OnInit {
     this.currentPage = 1;
     this.totalPages = 0;
     this.zoomLevel = 1;
+    this.pdfDoc = null;
   }
 }
